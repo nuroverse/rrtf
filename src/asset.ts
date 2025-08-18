@@ -8,9 +8,6 @@ export abstract class Asset<OutputType> {
   // unique identifier for the asset type
   static identifier: string;
 
-  // whether this asset type is a group (i.e., can contain sub-assets)
-  static isAssetGroup: boolean = false;
-
   static availableOptions = {
     required: [] as string[],
     optional: [] as string[]

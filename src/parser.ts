@@ -61,7 +61,8 @@ class RRTFTree<OutputType> {
  * 5 = if not enclosed in ID tag, shows full match
  */
 
-const PATTERN = /(\[([a-zA-Z0-9\-]+)\(?([^\[\]\(\)]+)?\)?\]([\s\S]*?)\[\/\2\])|([^\[\]]+)/gm;
+const TAG_PATTERN = /(\[([a-zA-Z0-9\-]+)\(?([^\[\]\(\)]+)?\)?\]([\s\S]*?)\[\/\2\])/gm;
+const ANY_CHILD_PATTERN = /(\[([a-zA-Z0-9\-]+)\(?([^\[\]\(\)]+)?\)?\]([\s\S]*?)\[\/\2\])|([^\[\]]+)/gm;
 const OPTION_PATTERN = /([a-zA-Z0-9\-]+)=\"([^\[\]\(\)]+?)\"/gm;
 
 export class RRTFParser<OutputType> {
@@ -72,7 +73,7 @@ export class RRTFParser<OutputType> {
   private parse = (str: string): Asset<OutputType>[] => {
     let results = [];
     let result;
-    while (result = PATTERN.exec(str)) {
+    while (result = ANY_CHILD_PATTERN.exec(str)) {
       if (result[5]) {
         results.push(
           this.portfolio.createAsset({
@@ -123,7 +124,7 @@ export class RRTFParser<OutputType> {
 
     results.forEach((result) => {
       const child = RRTFNode.addChild(result);
-      if ((result.constructor as typeof Asset).isAssetGroup) {
+      if (TAG_PATTERN.test(result.content)) {
         this.buildRRTFTree(result.content, child);
       }
     });

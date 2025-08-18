@@ -3,7 +3,6 @@ import { Asset, Portfolio, RRTFParser } from '../src/index.js';
 
 class RootAsset extends Asset<string> {
   static identifier = 'root';
-  static isAssetGroup = true;
 
   build(input?: { subAssets: string[] }): string {
     return input?.subAssets.join('\n') ?? this.content;
@@ -29,7 +28,6 @@ class AssetA extends Asset<string> {
 
 class AssetB extends Asset<string> {
   static identifier = 'asset-b';
-  static isAssetGroup = true;
 
   build(input?: { subAssets: string[] }): string {
     let val = 1;
