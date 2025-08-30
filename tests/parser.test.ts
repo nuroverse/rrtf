@@ -60,7 +60,7 @@ describe('Build + Encode', () => {
 
     const content = '[asset-a]42[/asset-a]';
 
-    parser.format(content, 'root');
+    parser.format(content);
     const output = parser.build();
     const encoded = parser.encode();
 
@@ -73,7 +73,7 @@ describe('Build + Encode', () => {
 
     const content = '[asset-c][/asset-c]';
 
-    parser.format(content, 'root');
+    parser.format(content);
     const output = parser.build();
     const encoded = parser.encode();
 
@@ -86,7 +86,7 @@ describe('Build + Encode', () => {
 
     const content = '[asset-a(name="VAR")]42[/asset-a]';
 
-    parser.format(content, 'root');
+    parser.format(content);
     const output = parser.build();
     const encoded = parser.encode();
 
@@ -99,7 +99,7 @@ describe('Build + Encode', () => {
 
     const content = '[asset-a(name="VAR",suffix="!!")]42[/asset-a]';
 
-    parser.format(content, 'root');
+    parser.format(content);
     const output = parser.build();
     const encoded = parser.encode();
 
@@ -112,7 +112,7 @@ describe('Build + Encode', () => {
 
     const content = '[asset-c(name="VAR",suffix="!!")][/asset-c]';
 
-    parser.format(content, 'root');
+    parser.format(content);
     const output = parser.build();
     const encoded = parser.encode();
 
@@ -125,7 +125,7 @@ describe('Build + Encode', () => {
 
     const content = '[asset-a]42[/asset-a][asset-a]2[/asset-a][asset-a]3[/asset-a]';
 
-    parser.format(content, 'root');
+    parser.format(content);
     const output = parser.build();
     const encoded = parser.encode();
 
@@ -138,7 +138,7 @@ describe('Build + Encode', () => {
 
     const content = '[asset-b][asset-a]42[/asset-a][asset-a]2[/asset-a][asset-a]3[/asset-a][/asset-b]';
 
-    parser.format(content, 'root');
+    parser.format(content);
     const output = parser.build();
     const encoded = parser.encode();
 
@@ -151,7 +151,7 @@ describe('Build + Encode', () => {
 
     const content = '[asset-b][asset-a]42[/asset-a][asset-a]2[/asset-a][asset-a]3[/asset-a][/asset-b][asset-b][asset-a]24[/asset-a][asset-a]10[/asset-a][/asset-b]';
 
-    parser.format(content, 'root');
+    parser.format(content);
     const output = parser.build();
     const encoded = parser.encode();
 

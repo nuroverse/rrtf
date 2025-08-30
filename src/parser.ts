@@ -67,6 +67,7 @@ const OPTION_PATTERN = /([a-zA-Z0-9\-]+)=\"([^\[\]\(\)]+?)\"/gm;
 
 export class RRTFParser<OutputType> {
   private portfolio: Portfolio<OutputType>;
+  private rootNodeId: string;
 
   private tree: RRTFTree<OutputType> | null = null;
 
@@ -102,16 +103,17 @@ export class RRTFParser<OutputType> {
     return results;
   }
 
-  constructor(portfolio: Portfolio<OutputType>) {
+  constructor(portfolio: Portfolio<OutputType>, rootNodeId: string = 'root') {
     this.portfolio = portfolio;
+    this.rootNodeId = rootNodeId;
   }
 
-  format(content: string, rootNodeId: string) {
+  format(content: string) {
     this.tree = new RRTFTree(
       new RRTFNode(
         this.portfolio.createAsset({
           content: content,
-          id: rootNodeId,
+          id: this.rootNodeId,
           options: {}
         })
       )
