@@ -10,6 +10,8 @@ export abstract class Asset<OutputType> {
   };
 
   content: string;
+
+  parent?: Asset<OutputType>;
   subAssets: Asset<OutputType>[];
 
   options: AssetOptions;
@@ -18,6 +20,7 @@ export abstract class Asset<OutputType> {
     this.content = content;
     this.options = options;
     this.subAssets = subAssets;
+    this.subAssets.forEach((asset) => asset.parent = this);
   }
 
   abstract build(): OutputType;

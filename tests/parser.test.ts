@@ -172,3 +172,24 @@ describe('Build + Encode', () => {
     expect(rrtf).toBe(content);
   });
 });
+
+describe('Tree Relationships', () => {
+  it('Child\'s Parent', () => {
+    const tree = new RRTFTree(portfolio);
+
+    const content = '[asset-b][asset-a]42[/asset-a][asset-a]2[/asset-a][asset-a]3[/asset-a][/asset-b]';
+
+    tree.construct(content);
+    const root = tree.root!;
+    const assetB = root.subAssets[0]!;
+    const assetA1 = assetB.subAssets[0]!;
+    const assetA2 = assetB.subAssets[1]!;
+    const assetA3 = assetB.subAssets[2]!;
+
+    expect(root.parent).toBeUndefined();
+    expect(assetB.parent).toBe(root);
+    expect(assetA1.parent).toBe(assetB);
+    expect(assetA2.parent).toBe(assetB);
+    expect(assetA3.parent).toBe(assetB);
+  });
+});
