@@ -1,13 +1,13 @@
-import type { Asset, AssetOptions } from "./asset.js";
+import type { Asset, AssetOptionsObject } from "./asset.js";
 
 interface ParsedAssetInput {
   id?: string;
-  options?: AssetOptions;
+  options?: AssetOptionsObject;
   content: string;
 }
 
 type AssetClass<OutputType> = {
-  new(content: string, options: AssetOptions, subAssets: Asset<OutputType>[]): Asset<OutputType>;
+  new(content: string, options: AssetOptionsObject, subAssets: Asset<OutputType>[]): Asset<OutputType>;
 } & typeof Asset<OutputType>;
 
 export class Portfolio<OutputType> {
@@ -64,7 +64,7 @@ export class Portfolio<OutputType> {
           })
         );
       } else if (result[1]) {
-        let options: AssetOptions = {};
+        let options: AssetOptionsObject = {};
         if (result[3]) {
           let option;
           while (option = OPTION_PATTERN.exec(result[3])) {

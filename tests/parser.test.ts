@@ -1,6 +1,17 @@
 import { describe, expect, it } from 'vitest';
 import { Asset, Portfolio, RRTFTree } from '../src/index.js';
+import { AssetOption } from '../src/options.js';
 
+// OPTIONS
+class NameOption extends AssetOption {
+  static identifier = 'name';
+}
+
+class SuffixOption extends AssetOption {
+  static identifier = 'suffix';
+}
+
+// ASSETS
 class RootAsset extends Asset<string> {
   static identifier = 'root';
 
@@ -16,13 +27,14 @@ class RootAsset extends Asset<string> {
 class AssetA extends Asset<string> {
   static identifier = 'asset-a';
 
-  availableOptions = {
+  static availableOptions = {
     required: [],
-    optional: ['name', 'suffix']
+    optional: [NameOption, SuffixOption]
   };
 
   build(): string {
-    return `The value of ${this.options['name'] ?? 'A'} is ${this.content}${this.options['suffix'] ?? ''}`;
+    console.log(this.options);
+    return `The value of ${this.options.getValue('name') ?? 'A'} is ${this.content}${this.options.getValue('suffix') ?? ''}`;
   }
 }
 
@@ -42,13 +54,13 @@ class AssetB extends Asset<string> {
 class AssetC extends Asset<string> {
   static identifier = 'asset-c';
 
-  availableOptions = {
+  static availableOptions = {
     required: [],
-    optional: ['name', 'suffix']
+    optional: [NameOption, SuffixOption]
   };
 
   build(): string {
-    return `The value of ${this.options['name'] ?? 'A'} is 12321${this.options['suffix'] ?? ''}`;
+    return `The value of ${this.options.getValue('name') ?? 'A'} is 12321${this.options.getValue('suffix') ?? ''}`;
   }
 }
 
